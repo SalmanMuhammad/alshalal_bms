@@ -45,7 +45,7 @@ A comprehensive business management application for Alshalal Factory, featuring 
 
 1. **Clone or navigate to the project directory**
    ```bash
-   cd business-management-app
+   cd alshalal_bms
    ```
 
 2. **Install dependencies**
