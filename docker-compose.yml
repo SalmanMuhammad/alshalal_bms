@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: alshalal-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: alshalal-factory
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    networks:
+      - alshalal-network
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: alshalal-backend
+    restart: unless-stopped
+    ports:
+      - "5001:5001"
+    environment:
+      MONGODB_URI: mongodb://admin:admin123@mongodb:27017/alshalal-factory?authSource=admin
+      PORT: 5001
+      HOST: 0.0.0.0
+      NODE_ENV: development
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/app
+      - backend_node_modules:/app/node_modules
+    networks:
+      - alshalal-network
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: alshalal-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      VITE_PROXY_TARGET: http://backend:5001
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+      - backend
+    volumes:
+      - .:/app
+      - frontend_node_modules:/app/node_modules
+    networks:
+      - alshalal-network
+
+volumes:
+  mongodb_data:
+    driver: local
+  mongodb_config:
+    driver: local
+  backend_node_modules:
+    driver: local
+  frontend_node_modules:
+    driver: local
+
+networks:
+  alshalal-network:
+    driver: bridge
