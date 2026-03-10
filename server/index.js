@@ -11,7 +11,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5001; // Changed from 5000 to avoid AirPlay conflict on macOS
-const HOST = process.env.HOST || 'localhost'
+const HOST = process.env.HOST || '0.0.0.0';
 
 // Middleware - CORS configuration
 const corsOptions = {

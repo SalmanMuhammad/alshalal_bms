@@ -119,8 +119,12 @@ npm run dev
 ```
 The frontend will run on `http://localhost:3000`
 
-### Cloudflare Pages Deployment (Frontend + API)
-See `CLOUDFLARE_SETUP.md` for the Cloudflare Pages setup using Pages Functions and MongoDB Atlas Data API.
+### Deployment
+- Frontend on Cloudflare Pages
+- Backend on Render (or another Node host)
+- Database on MongoDB Atlas
+
+See `CLOUDFLARE_SETUP.md` for the frontend deployment steps and `RENDER_SETUP.md` for the backend deployment steps.
 
 ### Production Build
 

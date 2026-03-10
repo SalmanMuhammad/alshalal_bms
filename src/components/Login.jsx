@@ -14,14 +14,17 @@ function Login({ onLoginSuccess }) {
     const [setupConfirmPassword, setSetupConfirmPassword] = useState('');
     const [setupLoading, setSetupLoading] = useState(false);
     const [setupError, setSetupError] = useState(null);
+    const [setupStatusError, setSetupStatusError] = useState(null);
 
     useEffect(() => {
         const loadSetupStatus = async () => {
             try {
                 const response = await authAPI.getSetupStatus();
                 setRequiresSetup(Boolean(response?.requiresSetup));
+                setSetupStatusError(null);
             } catch (err) {
                 setRequiresSetup(false);
+                setSetupStatusError(err.message || 'Unable to check backend setup status.');
             } finally {
                 setCheckingSetup(false);
             }
@@ -212,6 +215,7 @@ function Login({ onLoginSuccess }) {
                             </>
                         ) : (
                             <>
+                                {setupStatusError && renderError(setupStatusError)}
                                 {error && renderError(error)}
 
                                 <form onSubmit={handleSubmit} className="space-y-6">

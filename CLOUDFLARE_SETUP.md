@@ -1,43 +1,42 @@
-# Cloudflare Pages Deployment (Frontend + API)
+# Cloudflare Pages Frontend Deployment
 
-This project can run entirely on Cloudflare Pages by using Pages Functions for the API and MongoDB Atlas Data API for storage.
+This project should be deployed to Cloudflare Pages as a frontend-only app.
 
-## What Changed
-- The API is implemented in `functions/api/[[path]].js` (Cloudflare Pages Functions).
-- The Express server under `server/` is still useful for local Docker/dev, but **not** used on Cloudflare.
+The API should be hosted separately on Render using the Express server under `server/`. MongoDB Atlas App Services Data API is no longer the recommended path for this repository.
 
-## MongoDB Atlas Data API
-Cloudflare Workers do not support direct MongoDB connections, so the API talks to MongoDB through the Atlas Data API.
+## Cloudflare Pages Settings
 
-You need:
-- An Atlas cluster (free tier is fine).
-- Data API enabled for the cluster.
-- A Data API key.
+- Framework preset: `Vite`
+- Build command: `npm run build`
+- Build output directory: `dist`
 
-## Required Environment Variables (Cloudflare Pages)
-Set these in your Cloudflare Pages project:
+## Environment Variables
 
-- `MONGODB_DATA_API_URL`  
-  Example: `https://data.mongodb-api.com/app/<app-id>/endpoint/data/v1`
-- `MONGODB_DATA_API_KEY`
-- `MONGODB_DATA_SOURCE` (usually your cluster name, e.g. `Cluster0`)
-- `MONGODB_DATA_DATABASE` (e.g. `alshalal-factory`)
-- `JWT_SECRET` (strong random value)
+Set this in the Cloudflare Pages project:
 
-Optional collection overrides:
-- `MONGODB_COLLECTION_USERS` (default `users`)
-- `MONGODB_COLLECTION_EMPLOYEES` (default `employees`)
-- `MONGODB_COLLECTION_ATTENDANCE` (default `attendances`)
-- `MONGODB_COLLECTION_QUOTATIONS` (default `quotations`)
+- `VITE_API_URL`
 
-## Cloudflare Pages Build Settings
-- **Build command**: `npm run build`
-- **Output directory**: `dist`
+Example:
 
-No `VITE_API_URL` is required because `/api` is served from the same Pages domain.
+```env
+VITE_API_URL=https://your-render-service.onrender.com/api
+```
+
+## Deployment Flow
+
+1. Deploy the backend first.
+2. Verify the backend health endpoint:
+
+```text
+https://your-render-service.onrender.com/api/health
+```
+
+3. Add `VITE_API_URL` to the Cloudflare Pages project.
+4. Deploy the frontend to Cloudflare Pages.
+5. Open the site and complete the initial admin setup if no users exist yet.
 
 ## Notes
-- The API uses JWTs signed with `JWT_SECRET`.
-- Attendance overtime is stored as a plain object `{ "dayIndex": hours }`.
-- If you already have MongoDB data created with the Express server, it will still work. New records created through Pages Functions will store `employeeId` as a string.
 
+- Do not set `MONGODB_URI` or Atlas credentials in Cloudflare Pages for this setup.
+- The frontend calls the backend over HTTPS using `VITE_API_URL`.
+- If the backend is on a free Render plan, the first request after inactivity may be slow while the service wakes up.
