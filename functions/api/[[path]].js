@@ -75,6 +75,15 @@ export async function onRequest(context) {
 
 async function handleAuth(route, request, env, collections) {
   const action = route[0];
+
+  if (action === 'setup-status' && request.method === 'GET') {
+    const userCount = await countDocuments(env, collections.users);
+    return jsonResponse({
+      requiresSetup: userCount === 0,
+      userCount,
+    });
+  }
+
   const body = await parseJsonBody(request);
 
   if (action === 'register' && request.method === 'POST') {
@@ -693,4 +702,3 @@ async function handleAttendance(route, request, env, collections) {
 
   return jsonResponse({ error: 'Not found' }, 404);
 }
-

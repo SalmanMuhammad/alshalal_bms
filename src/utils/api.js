@@ -113,6 +113,7 @@ export const authAPI = {
         method: 'POST',
         body: JSON.stringify({ username, password }),
     }),
+    getSetupStatus: () => apiCall('/auth/setup-status'),
     register: (username, password, role, employeeId) => apiCall('/auth/register', {
         method: 'POST',
         body: JSON.stringify({ username, password, role, employeeId }),
@@ -123,4 +124,3 @@ export const authAPI = {
     }),
     getMe: () => apiCall('/auth/me'),
 };
-

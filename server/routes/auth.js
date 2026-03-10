@@ -6,6 +6,19 @@ import { generateToken, authenticateToken, requireAdmin } from '../middleware/au
 
 const router = express.Router();
 
+router.get('/setup-status', async (req, res) => {
+    try {
+        const userCount = await User.countDocuments();
+        res.json({
+            requiresSetup: userCount === 0,
+            userCount,
+        });
+    } catch (error) {
+        console.error('Setup status error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // Register new user (admin only - or can be used for initial setup)
 // Allow registration without auth if no users exist (for initial setup)
 // Otherwise require admin authentication
