@@ -4,7 +4,6 @@ const quotationSchema = new mongoose.Schema({
     documentNumber: {
         type: String,
         required: true,
-        index: true,
     },
     quotationDate: {
         type: Date,
@@ -62,4 +61,3 @@ quotationSchema.index({ quotationDate: -1 });
 quotationSchema.index({ createdAt: -1 });
 
 export default mongoose.model('Quotation', quotationSchema);
-

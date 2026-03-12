@@ -51,28 +51,39 @@ app.use(express.urlencoded({ extended: true }));
 // MongoDB Connection
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/alshalal-factory';
 
-mongoose.connect(MONGODB_URI)
-.then(() => {
-    console.log('✅ Connected to MongoDB');
-})
-.catch((error) => {
-    console.error('❌ MongoDB connection error:', error);
-    process.exit(1);
-});
-
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/employees', employeeRoutes);
 app.use('/api/quotations', quotationRoutes);
 
+app.get('/', (req, res) => {
+    res.json({
+        status: 'OK',
+        message: 'Alshalal BMS API is running',
+        health: '/api/health',
+    });
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', message: 'Server is running' });
 });
 
-app.listen(PORT, HOST, () => {
-    console.log(`🚀 Server running on http://${HOST}:${PORT}`);
-    console.log(`📡 API endpoints available at http://${HOST}:${PORT}/api`);
-    console.log(`💚 Health check: http://${HOST}:${PORT}/api/health`);
-});
+async function startServer() {
+    try {
+        await mongoose.connect(MONGODB_URI);
+        console.log('✅ Connected to MongoDB');
+
+        app.listen(PORT, HOST, () => {
+            console.log(`🚀 Server running on http://${HOST}:${PORT}`);
+            console.log(`📡 API endpoints available at http://${HOST}:${PORT}/api`);
+            console.log(`💚 Health check: http://${HOST}:${PORT}/api/health`);
+        });
+    } catch (error) {
+        console.error('❌ MongoDB connection error:', error);
+        process.exit(1);
+    }
+}
+
+startServer();
