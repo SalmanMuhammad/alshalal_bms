@@ -3,6 +3,7 @@ import { emptyItem, currency, addDays } from '../utils/helpers';
 import { quotationAPI } from '../utils/api';
 import { Save, ArrowLeft, Loader2, CheckCircle, XCircle, X, FileText, Printer, Download } from 'lucide-react';
 import Header from './Header';
+import QuotationMobileWizard from './QuotationMobileWizard';
 
 function QuotationApp({ onNavigate, quotationId = null, user, onLogout }) {
     const today = new Date().toISOString().split('T')[0];
@@ -187,8 +188,44 @@ function QuotationApp({ onNavigate, quotationId = null, user, onLogout }) {
                     onNavigate={onNavigate}
                 />
             </div>
+
+            <div className="px-4 py-4 sm:px-6 no-print">
+                <QuotationMobileWizard
+                    documentNumber={documentNumber}
+                    setDocumentNumber={setDocumentNumber}
+                    quotationDate={quotationDate}
+                    setQuotationDate={setQuotationDate}
+                    customerEmail={customerEmail}
+                    setCustomerEmail={setCustomerEmail}
+                    client={client}
+                    setClient={setClient}
+                    items={items}
+                    updateItem={updateItem}
+                    addItem={addItem}
+                    removeItem={removeItem}
+                    vatPercentage={vatPercentage}
+                    setVatPercentage={setVatPercentage}
+                    hasTransportation={hasTransportation}
+                    setHasTransportation={setHasTransportation}
+                    transportationCharges={transportationCharges}
+                    setTransportationCharges={setTransportationCharges}
+                    paymentDetails={paymentDetails}
+                    setPaymentDetails={setPaymentDetails}
+                    notes={notes}
+                    setNotes={setNotes}
+                    terms={terms}
+                    setTerms={setTerms}
+                    totals={totals}
+                    saving={saving}
+                    isEditMode={isEditMode}
+                    expiryDate={expiryDate}
+                    onNavigate={onNavigate}
+                    onSave={handleSave}
+                    onPrint={handlePrint}
+                />
+            </div>
             
-            <div className="min-h-screen bg-slate-50">
+            <div className="hidden min-h-screen bg-slate-50 lg:block print:block">
                 <div className="w-full px-4 sm:px-6 lg:px-8 py-6 no-print:py-0">
                     <div className="bg-white rounded-2xl shadow-xl border border-slate-200/60 overflow-hidden print:rounded-none print:shadow-none print:border-0 w-full">
                     <div className="page watermark-bg w-full print:w-[210mm]">
@@ -700,4 +737,3 @@ function QuotationApp({ onNavigate, quotationId = null, user, onLogout }) {
 }
 
 export default QuotationApp;
-

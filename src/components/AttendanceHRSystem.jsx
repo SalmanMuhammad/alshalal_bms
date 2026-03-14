@@ -7,6 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { generateDays, getMonthName } from '../utils/helpers';
 import { attendanceAPI, employeeAPI, authAPI } from '../utils/api';
 import Header from './Header';
+import AttendanceMobileView from './AttendanceMobileView';
 
 function AttendanceHRSystem({ onNavigate, user, onLogout }) {
     const currentDate = new Date();
@@ -818,6 +819,11 @@ function AttendanceHRSystem({ onNavigate, user, onLogout }) {
         }
     };
 
+    const openNotesModal = (employee) => {
+        setSelectedNoteEmployee(employee);
+        setNotesText(employee.notes || '');
+    };
+
     if (loading) {
         return (
             <div className="min-h-screen bg-slate-100 flex items-center justify-center">
@@ -935,7 +941,7 @@ function AttendanceHRSystem({ onNavigate, user, onLogout }) {
                 </div>
 
             {/* Dashboard Graph */}
-            <section className="mb-8 bg-white p-6 rounded-xl shadow-sm">
+            <section className="mb-8 hidden lg:block bg-white p-6 rounded-xl shadow-sm">
                 <h2 className="text-lg font-bold text-slate-700 mb-4 flex items-center gap-2">
                     <Calendar className="w-5 h-5 text-factory-blue" />
                     Daily Attendance Overview
@@ -983,7 +989,7 @@ function AttendanceHRSystem({ onNavigate, user, onLogout }) {
 
             {/* Add Employee Button - Admin Only */}
             {isAdmin && (
-                <div className="mb-4 flex justify-end no-print">
+                <div className="mb-4 hidden lg:flex justify-end no-print">
                     <button
                         onClick={openAddEmployeeModal}
                         className="px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-xl hover:from-green-700 hover:to-green-800 font-semibold shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2"
@@ -993,8 +999,29 @@ function AttendanceHRSystem({ onNavigate, user, onLogout }) {
                 </div>
             )}
 
+            <AttendanceMobileView
+                employees={employees}
+                days={days}
+                selectedMonthYearLabel={selectedMonthYearLabel}
+                averageAttendance={averageAttendance}
+                isAdmin={isAdmin}
+                isClient={isClient}
+                todayIndex={todayIndex}
+                savingEmployees={savingEmployees}
+                calculateNetSalary={calculateNetSalary}
+                calculateRemaining={calculateRemaining}
+                updateEmployee={updateEmployee}
+                toggleAttendance={toggleAttendance}
+                updateOvertime={updateOvertime}
+                onOpenNotes={openNotesModal}
+                onOpenRegister={openRegisterModal}
+                onOpenResetPassword={openResetPasswordModal}
+                onRemoveEmployee={removeEmployee}
+                onOpenAddEmployee={openAddEmployeeModal}
+            />
+
             {/* Main Table */}
-            <div className="bg-white rounded-xl shadow-xl overflow-hidden border border-slate-200">
+            <div className="hidden lg:block bg-white rounded-xl shadow-xl overflow-hidden border border-slate-200">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm text-left">
                         <thead className="bg-slate-800 text-white font-semibold uppercase text-xs tracking-wider">
