@@ -1,19 +1,13 @@
 import React from 'react';
 import { LogOut, User, FileText, Users, Calendar, TrendingUp, Shield, ArrowRight, Sparkles } from 'lucide-react';
+import landingBackground from '../assets/logo_7.jpg';
 
 function LandingPage({ onNavigate, user, onLogout }) {
     const isAdmin = user?.role === 'admin';
     const isClient = user?.role === 'client';
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
-                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-indigo-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
-            </div>
-
+        <div className="min-h-screen relative bg-slate-900" style={{ backgroundImage: `linear-gradient(rgba(15, 30, 60, 0.85), rgba(15, 30, 60, 0.95)), url(${landingBackground})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
             <div className="relative z-10 min-h-screen flex flex-col">
                 {/* Top Navigation Bar - Modern Design */}
                 <nav className="bg-white/95 backdrop-blur-xl border-b border-slate-200/60 shadow-lg sticky top-0 z-50">
@@ -42,7 +36,7 @@ function LandingPage({ onNavigate, user, onLogout }) {
                                         <p className="text-sm font-semibold text-slate-600">
                                             AL-SUBHI TRADING & EST.
                                         </p>
-                                        <div className="flex items-center gap-3 mt-1">
+                                        {/* <div className="flex items-center gap-3 mt-1">
                                             <span className="text-xs text-slate-500 font-medium">
                                                 VAT: 310320454300003
                                             </span>
@@ -50,7 +44,7 @@ function LandingPage({ onNavigate, user, onLogout }) {
                                             <span className="text-xs text-slate-500 font-medium">
                                                 CR: 40326322
                                             </span>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                                 
@@ -132,17 +126,17 @@ function LandingPage({ onNavigate, user, onLogout }) {
                     <div className="max-w-7xl w-full">
                         {/* Welcome Section */}
                         <div className="text-center mb-12">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100/50 rounded-full mb-4">
-                                <Sparkles className="w-4 h-4 text-blue-600" />
-                                <span className="text-sm font-semibold text-blue-700">Welcome Back</span>
+                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full mb-4 border border-white/10 shadow-lg">
+                                <Sparkles className="w-4 h-4 text-blue-300" />
+                                <span className="text-sm font-semibold text-blue-50">Welcome Back</span>
                             </div>
-                            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-4">
+                            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-md">
                                 AMAL SAAD SULAIMAN
                             </h2>
-                            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-700 mb-3">
+                            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-200 mb-3 drop-shadow-md">
                                 AL-SUBHI TRADING & EST.
                             </h3>
-                            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                            <p className="text-lg text-blue-100/80 max-w-2xl mx-auto drop-shadow-md">
                                 Streamline your business operations with our comprehensive management system
                             </p>
                         </div>
@@ -288,22 +282,22 @@ function LandingPage({ onNavigate, user, onLogout }) {
                         </div>
 
                         {/* Footer */}
-                        <div className="max-w-5xl mx-auto mt-12 pt-8 border-t border-slate-200">
+                        <div className="max-w-5xl mx-auto mt-12 pt-8 border-t border-white/20">
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
                                 <div>
-                                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Registration</p>
-                                    <p className="text-sm text-slate-700">VAT NO. 310320454300003</p>
-                                    <p className="text-sm text-slate-700">CR: 40326322</p>
+                                    <p className="text-xs font-semibold text-blue-200/60 uppercase tracking-wider mb-2">Registration</p>
+                                    <p className="text-sm text-blue-100">VAT NO. 310320454300003</p>
+                                    <p className="text-sm text-blue-100">CR: 40326322</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Location</p>
-                                    <p className="text-sm text-slate-700">KINGDOM OF SAUDI ARABIA</p>
-                                    <p className="text-sm text-slate-700">JEDDAH · P.O.BOX 22341</p>
+                                    <p className="text-xs font-semibold text-blue-200/60 uppercase tracking-wider mb-2">Location</p>
+                                    <p className="text-sm text-blue-100">KINGDOM OF SAUDI ARABIA</p>
+                                    <p className="text-sm text-blue-100">JEDDAH · P.O.BOX 22341</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Contact</p>
-                                    <p className="text-sm text-slate-700">+966 55 051 9620</p>
-                                    <p className="text-sm text-slate-700">alshallaltawafaq@gmail.com</p>
+                                    <p className="text-xs font-semibold text-blue-200/60 uppercase tracking-wider mb-2">Contact</p>
+                                    <p className="text-sm text-blue-100">+966 55 051 9620</p>
+                                    <p className="text-sm text-blue-100">alshallaltawafaq@gmail.com</p>
                                 </div>
                             </div>
                         </div>

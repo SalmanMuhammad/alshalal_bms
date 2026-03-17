@@ -226,8 +226,8 @@ function QuotationApp({ onNavigate, quotationId = null, user, onLogout }) {
             </div>
             
             <div className="hidden min-h-screen bg-slate-50 lg:block print:block">
-                <div className="w-full px-4 sm:px-6 lg:px-8 py-6 no-print:py-0">
-                    <div className="bg-white rounded-2xl shadow-xl border border-slate-200/60 overflow-hidden print:rounded-none print:shadow-none print:border-0 w-full">
+                <div className="w-full flex justify-center px-4 sm:px-6 lg:px-8 py-6 no-print:py-0">
+                    <div className="bg-white rounded-2xl shadow-xl border border-slate-200/60 overflow-hidden print:rounded-none print:shadow-none print:border-0 w-full max-w-[1100px]">
                     <div className="page watermark-bg w-full print:w-[210mm]">
                         <div className="content px-5 py-4 space-y-2.5 text-slate-800 w-full">
                             {/* Quotation Header */}
@@ -366,7 +366,7 @@ function QuotationApp({ onNavigate, quotationId = null, user, onLogout }) {
                                                 <td className="py-1.5 px-1.5 align-top">
                                                     <textarea
                                                         placeholder="Product Details"
-                                                        rows="6"
+                                                        rows="2"
                                                         className="line-item-textarea w-full border border-slate-200 rounded-md px-2 py-1 text-[11px] text-slate-800 focus:outline-blue-500 bg-white"
                                                         value={item.description}
                                                         onChange={(e) => updateItem(item.id, 'description', e.target.value)}

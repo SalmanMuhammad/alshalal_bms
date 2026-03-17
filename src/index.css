@@ -116,7 +116,8 @@ body {
 /* Quotation System Styles */
 .page {
   width: 100%;
-  max-width: 100%;
+  margin: 0 auto;
+  max-width: 250mm;
   min-height: 297mm;
   background: #ffffff;
   border-radius: 16px;
@@ -163,10 +164,9 @@ body {
 }
 
 .line-item-textarea {
-  min-height: 7.5rem;
-  height: 7.5rem;
-  resize: none;
-  overflow: hidden;
+  min-height: 2.5rem;
+  resize: vertical;
+  overflow-y: auto;
   line-height: 1.25;
 }
 
@@ -299,8 +299,16 @@ body {
   } 
 
   * {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Ensure containers do not clip content during pagination */
+  div, section, header, footer, article, table, tbody, tr, td {
+    overflow: visible !important;
   }
 
   body {

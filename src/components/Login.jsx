@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AlertCircle, Loader2, LogIn, ShieldCheck } from 'lucide-react';
 import { authAPI } from '../utils/api';
+import loginBackground from '../assets/logo_7.jpg';
 
 function Login({ onLoginSuccess }) {
     const [username, setUsername] = useState('');
@@ -99,7 +100,7 @@ function Login({ onLoginSuccess }) {
 
     if (checkingSetup) {
         return (
-            <div className="min-h-screen flex items-center justify-center p-8" style={{ background: 'linear-gradient(135deg, #e0e7ff, #f4f4fb)' }}>
+            <div className="min-h-screen flex items-center justify-center p-8 relative" style={{ backgroundImage: `linear-gradient(rgba(15, 30, 60, 0.7), rgba(15, 30, 60, 0.8)), url(${loginBackground})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
                 <div className="max-w-md w-full">
                     <div className="bg-gradient-to-br from-blue-950 via-blue-800 to-blue-600 rounded-3xl shadow-2xl overflow-hidden">
                         <div className="p-12 text-white text-center">
@@ -114,7 +115,7 @@ function Login({ onLoginSuccess }) {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center p-8" style={{ background: 'linear-gradient(135deg, #e0e7ff, #f4f4fb)' }}>
+        <div className="min-h-screen flex items-center justify-center p-8 relative" style={{ backgroundImage: `linear-gradient(rgba(15, 30, 60, 0.7), rgba(15, 30, 60, 0.8)), url(${loginBackground})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
             <div className="max-w-md w-full">
                 <div className="bg-gradient-to-br from-blue-950 via-blue-800 to-blue-600 rounded-3xl shadow-2xl overflow-hidden">
                     <div className="p-12 text-white">

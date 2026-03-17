@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FileText, Plus, Edit, Trash2, Calendar, Building2, Search, ArrowRight, Eye } from 'lucide-react';
 import { quotationAPI } from '../utils/api';
 import Header from './Header';
+import landingBackground from '../assets/logo_7.jpg';
 
 function QuotationList({ onNavigate, onEditQuotation, user, onLogout }) {
     const [quotations, setQuotations] = useState([]);
@@ -62,17 +63,17 @@ function QuotationList({ onNavigate, onEditQuotation, user, onLogout }) {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-                <div className="text-center">
-                    <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4" />
-                    <p className="text-slate-600">Loading quotations...</p>
+            <div className="min-h-screen relative flex items-center justify-center" style={{ backgroundImage: `linear-gradient(rgba(15, 30, 60, 0.85), rgba(15, 30, 60, 0.95)), url(${landingBackground})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
+                <div className="text-center bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20">
+                    <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-400 rounded-full animate-spin mx-auto mb-4" />
+                    <p className="text-white font-medium">Loading quotations...</p>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-slate-50">
+        <div className="min-h-screen relative" style={{ backgroundImage: `linear-gradient(rgba(15, 30, 60, 0.85), rgba(15, 30, 60, 0.95)), url(${landingBackground})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
             {/* Navigation Header */}
             <Header 
                 user={user} 
@@ -87,8 +88,8 @@ function QuotationList({ onNavigate, onEditQuotation, user, onLogout }) {
                 <div className="mb-8">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                         <div>
-                            <h1 className="text-4xl font-bold text-slate-900 mb-2">Quotation Management</h1>
-                            <p className="text-slate-600">View and manage all your quotations</p>
+                            <h1 className="text-4xl font-bold text-white mb-2 drop-shadow-md">Quotation Management</h1>
+                            <p className="text-blue-100 drop-shadow-sm">View and manage all your quotations</p>
                         </div>
                         <button
                             onClick={() => onNavigate('quotation', null)}

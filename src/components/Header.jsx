@@ -64,7 +64,7 @@ function Header({ user, onLogout, onNavigateHome, currentView, onNavigate }) {
             <div className="w-full px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Left: Company Logo - Clickable to Dashboard */}
-                    <div className="flex items-center flex-shrink-0">
+                    <div className="flex items-center gap-4 flex-shrink-0">
                         <button
                             onClick={onNavigateHome}
                             className="flex items-center gap-3 group transition-all duration-200 hover:opacity-80"
@@ -80,6 +80,25 @@ function Header({ user, onLogout, onNavigateHome, currentView, onNavigate }) {
                                 </div>
                             </div>
                         </button>
+                        
+                        {/* Company Info */}
+                        <div className="hidden md:flex flex-col justify-center border-l border-slate-200 pl-4 h-full text-left">
+                            <h1 className="text-sm font-bold text-slate-900 leading-tight">
+                                AMAL SAAD SULAIMAN
+                            </h1>
+                            <p className="text-[10px] font-semibold text-slate-600 leading-tight">
+                                AL-SUBHI TRADING & EST.
+                            </p>
+                            {/* <div className="flex items-center gap-2 mt-0.5">
+                                <span className="text-[9px] text-slate-500 font-medium">
+                                    VAT: 310320454300003
+                                </span>
+                                <span className="text-[9px] text-slate-400">•</span>
+                                <span className="text-[9px] text-slate-500 font-medium">
+                                    CR: 40326322
+                                </span>
+                            </div> */}
+                        </div>
                     </div>
                     
                     {/* Center: Navigation Menu (Desktop) */}
